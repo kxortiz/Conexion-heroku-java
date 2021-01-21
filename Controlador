@@ -1,0 +1,42 @@
+package sample;
+
+import dao.UsuarioDao;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import modelo.Usuario;
+
+import javax.swing.*;
+
+public class Controller {
+    @FXML
+    private TextField txtnombre;
+
+    @FXML
+    private TextField txtmail;
+
+    @FXML
+    private void onClick(ActionEvent event) {
+        boolean revisar = false;
+        //System.out.println("haber"+ txtNombre.getText());
+        try {
+            while (revisar == false) {
+                Usuario constructoruser = new Usuario(txtnombre.getText(), txtmail.getText());
+                String textoemail = txtmail.getText();
+                for (int i = 0; i <= textoemail.length(); i++) {
+
+                    if (textoemail.charAt(i) == '@') {
+                        revisar = true;
+                        UsuarioDao ingresar = new UsuarioDao();
+                        ingresar.insertarUsuario(constructoruser);//lista.add(user1)
+                        JOptionPane.showMessageDialog(null, "Se ha grabado correctamente");
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            if (revisar == false) {
+                JOptionPane.showMessageDialog(null, "El correo no contiene el simbolo @");
+            }
+            System.out.println("" + ex.getMessage());
+        }
+    }
