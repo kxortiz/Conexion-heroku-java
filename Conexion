@@ -1,0 +1,25 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class Conexion {
+        public Connection connectToDB() {
+            Connection connection = null;
+            try {
+                //Class.forName("org.postgresql.Driver");//localhost
+                //connection = DriverManager.getConnection("jdbc:postgresql://engicoders:5432/dbusuario","postgres", "postgres");
+                // Por favor conectate a la otra base de datos *****ojo
+                connection = DriverManager.getConnection("jdbc:postgresql://ec2-52-205-61-60.compute-1.amazonaws.com:5432/d3dglfoju73m39","oqejhrqaluzgkd", "2c4956527948a36d78fe6a5f43e6ef0f47577443c057f751d3b34ce420918146");
+                if (connection != null) {
+                    System.out.println("Se estableció la conexión :)");
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+                System.out.println("Error al conectar a la base.");
+                e.printStackTrace();
+            }finally {
+                return connection;
+            }
+
+        }
